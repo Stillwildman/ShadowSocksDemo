@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01ABA0</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Transparent Colors -->
+    <color name="transparent_full">#00000000</color>
+    <color name="transparent_half_white">#4FFFFFFF</color>
+    <color name="transparent_quarter_white">#AFFFFFFF</color>
+    <color name="transparent_little_white">#D8FFFFFF</color>
+    <color name="transparent_half_gray">#4F838383</color>
+    <color name="transparent_more_gray">#9F838383</color>
+    <color name="transparent_quarter_gray">#CFE0E0E0</color>
+    <color name="transparent_little_black">#1F000000</color>
+    <color name="transparent_half_black">#4F000000</color>
+    <color name="transparent_half_more_black">#6F000000</color>
+    <color name="transparent_half_and_little_more_black">#6F000000</color>
+    <color name="transparent_quarter_black">#AF000000</color>
+    <color name="transparent_deep_blue">#EF384857</color>
+    <color name="transparent_crystal_light">#4F33BEE5</color>
+    <color name="transparent_crystal_lighter">#CF33BEE5</color>
+    <color name="transparent_crystal">#3F0092f4</color>
+    <color name="transparent_light_blue">#AF0277BD</color>
+    <color name="transparent_quarter_teal">#AF00BFA5</color>
+    <color name="transparent_half_teal">#6F00BFA5</color>
+    <color name="transparent_little_teal">#1F00BFA5</color>
+    <color name="transparent_quarter_red">#AFD50000</color>
+    <color name="transparent_half_red">#6FD50000</color>
+    <color name="transparent_little_red">#1FD50000</color>
+    <color name="transparent_quarter_primaryDark">#AF00887A</color>
+    <color name="transparent_half_primary">#6F01ABA0</color>
+
+    <!-- From TYEZgo2.0 -->
+    <color name="common_background_color">#F3F3F3</color>
+    <color name="common_text_color">#0E0E0E</color>
+    <color name="common_title_color">#7E7E80</color>
+    <color name="common_subtitle_color">#747479</color>
+    <color name="poi_toolbar_color">#136A6F</color>
+    <color name="transit_toolbar_color">#F4A929</color>
+    <color name="transit_train_info_background">#AA9A8B</color>
+    <color name="parking_common_color">#074E7E</color>
+    <color name="switch_tab_off">#757472</color>
+    <color name="switch_tab_on">#F4A929</color>
+    <color name="airport_terminal_1">#F0D6B0</color>
+    <color name="airport_terminal_2">#ECE3D5</color>
+    <color name="route_toolbar_color">#8B1D64</color>
+    <color name="route_button_off">#8B1D64</color>
+    <color name="route_button_on">#66174E</color>
+    <color name="bus_common_color">#724B22</color>
+    <color name="bus_upcoming_time">#C7383C</color>
+    <color name="bus_button_on">#5B391B</color>
+    <color name="taxi_common_color">#D0611E</color>
+    <color name="ebike_toolbar_color">#B74622</color>
+    <color name="tab_layout_toolbar_color">#00324D</color>
+    <color name="road_speed_name_bar">#349DA0</color>
+    <color name="traffic_status_good">#00FF00</color>
+    <color name="traffic_status_medium">#FFFF00</color>
+    <color name="traffic_status_slow">#FF9933</color>
+    <color name="traffic_status_jam">#FF0000</color>
+
+    <!-- Polyline Colors -->
+    <color name="polyline_all_of_taiwan">#009844</color>
+    <color name="polyline_cycling">#009FE8</color>
+    <color name="polyline_top_ten">#E51373</color>
+    <color name="polyline_recommended">#724B22</color>
+
+    <color name="polyline_plan_route">@color/md_purple_A400</color>
+    <color name="polyline_plan_route_highlight">@color/md_deep_purple_A700</color>
+
+    <!-- Metro Text Background Colors -->
+    <color name="metro_orange">#F57C00</color>
+    <color name="metro_blue">#0000F2</color>
+    <color name="metro_green">#00A002</color>
+    <color name="metro_red">#D50000</color>
+    <color name="metro_brown">#884400</color>
+
+    <!-- From Taichung High Risk -->
+    <color name="tc_primaryColor">#3396D2</color>
+    <color name="tc_primaryMyPrefer">@color/md_light_blue_700</color>
+    <color name="tc_directions_tab_focused">#329BD7</color>
+    <color name="tc_transit_default_color">@color/md_teal_A700</color>
+
+    <color name="menu_bus">#14AE67</color>
+    <color name="menu_parking_query">#2973BA</color>
+    <color name="menu_tra">#019FC2</color>
+    <color name="menu_hsr">#EA5513</color>
+    <color name="menu_flights">#0BA299</color>
+    <color name="menu_towing_query">#6B7A99</color>
+    <color name="menu_taxi">#F7AC2C</color>
+    <color name="menu_police_broadcast">#A66CA9</color>
+    <color name="menu_setting">#A0A0A0</color>
+    <color name="menu_news">#9D7245</color>
+    <color name="menu_back_to_map">@color/tc_primaryColor</color>
+
+    <color name="flight_state_on_time">@color/menu_flights</color>
+    <color name="flight_state_delay">#DD5F60</color>
+    <color name="flight_state_taken_off">#B5B5B5</color>
+    <color name="flight_state_check_in">#8F7C6D</color>
+    <color name="flight_state_departing">#018FE5</color>
+    <color name="flight_state_checking">#eeB134</color>
+    <color name="flight_state_arrived">#8B86C8</color>
+    <color name="flight_state_cancelled">#EC6C00</color>
+    <color name="flight_state_boarding">#6FBA44</color>
+
+    <color name="train_type_tze_chiang">#946134</color>
+    <color name="train_type_chu_kuang">#F29600</color>
+    <color name="train_type_fu_hsing_semi">#FF6400</color>
+    <color name="train_type_fast_local">#646464</color>
+    <color name="train_type_local">#2CA6E0</color>
+    <color name="train_type_ordinary">#005FC0</color>
+    <color name="train_type_puyuma">#E50012</color>
+    <color name="train_type_taroko">#00913A</color>
+
+    <color name="parking_options_mobile_pay">#5AB4FF</color>
+    <color name="parking_options_credit_card_pay">#5BC199</color>
+    <color name="parking_options_account_pay">#FAA632</color>
+    <color name="parking_options_barcode_pay">#9F8ED2</color>
+    <color name="parking_fine">#FF3D55</color>
+    <color name="parking_tickets">#2F72B9</color>
+    <color name="parking_payment_mobile">#5AB4FF</color>
+    <color name="parking_payment_credit_card">#5BC199</color>
+    <color name="parking_payment_account">#FAA632</color>
+    <color name="parking_payment_barcode">#9F8ED2</color>
+
+    <color name="drive_mode_icon">#F8B544</color>
+
+    <color name="layer_button_ibike">#EC7FB0</color>
+    <color name="layer_button_parking">#975D9A</color>
+
+    <!-- TYMaaS -->
+    <color name="nav_item_selected">#00887A</color>
+    <color name="home_background">#DBEFED</color>
+    <color name="button_yellow">#FFAA3D</color>
+    <color name="button_pink">#FF788C</color>
+
+    <color name="plan_day_theme_color_main_1">#01ABA0</color>
+    <color name="plan_day_theme_color_background_1">#B7DFD4</color>
+    <color name="plan_day_theme_color_poi_row_1">#EAF5F1</color>
+
+    <color name="plan_day_theme_color_main_2">#FFAA3D</color>
+    <color name="plan_day_theme_color_background_2">#FEE8AE</color>
+    <color name="plan_day_theme_color_poi_row_2">#FFF8E6</color>
+
+    <color name="plan_day_theme_color_main_3">#00ABC7</color>
+    <color name="plan_day_theme_color_background_3">#B8DFFF</color>
+    <color name="plan_day_theme_color_poi_row_3">#EBF5FF</color>
+
+    <color name="plan_day_theme_color_main_4">#6DBA5A</color>
+    <color name="plan_day_theme_color_background_4">#C5E1A5</color>
+    <color name="plan_day_theme_color_poi_row_4">#E8F5E9</color>
+
+    <color name="plan_day_theme_color_main_5">#EB6BA8</color>
+    <color name="plan_day_theme_color_background_5">#C9A5CB</color>
+    <color name="plan_day_theme_color_poi_row_5">#E5D2E5</color>
+
+    <color name="plan_day_theme_color_main_6">#FF788C</color>
+    <color name="plan_day_theme_color_background_6">#F6BDC6</color>
+    <color name="plan_day_theme_color_poi_row_6">#FBDEE3</color>
+
+    <color name="plan_day_theme_color_main_7">#F08421</color>
+    <color name="plan_day_theme_color_background_7">#E7BF8B</color>
+    <color name="plan_day_theme_color_poi_row_7">#F3DFC6</color>
+
+    <color name="dark_primary">#00A192</color>
+    <color name="dark_yellow">#FE9F33</color>
+    <color name="dark_pink">#FF6C7F</color>
+
+    <color name="poi_picking_row">#EDF7F6</color>
+
+    <color name="light_yellow">#FFC864</color>
+    <color name="store_bus_ticket_button">#F6AA54</color>
+
+    <color name="store_traffic">#FFA33E</color>
+    <color name="store_ticket">#A887BC</color>
+    <color name="store_attractions">#EF8A9F</color>
+    <color name="store_rental">#3A99D5</color>
+    <color name="store_traffic_charter_grey">#888888</color>
+
+    <color name="poi_category_background">#38506A</color>
+
+    <color name="hami_point_prompt_text">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="price_color">@color/colorPrimary</color>
+
+    <color name="yellow_bike">#FFAA30</color>
+
+    <color name="light_green">#6AC259</color>
+
+</resources>
