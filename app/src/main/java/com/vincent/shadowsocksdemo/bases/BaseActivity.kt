@@ -3,12 +3,12 @@ package com.vincent.shadowsocksdemo.bases
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,6 +24,8 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
     protected val TAG = javaClass.simpleName
 
     protected abstract fun getLayoutId() : Int
+    protected abstract fun onMenuItemClick(itemId : Int)
+    protected abstract fun hasFragmentBackStack() : Boolean
     protected abstract fun getToolbar() : Toolbar?
     protected abstract fun getLoadingCircle() : ProgressBar?
     protected abstract fun getDrawer() : DrawerLayout?
@@ -36,6 +38,8 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
         DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutId(), null, false) as bindingView
     }
 
+    private var exitTime : Long = 0
+
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +50,18 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
         initNavigationView()
 
         init()
+    }
+
+    /**
+     * Handle action bar item clicks here.
+     *
+     * The action bar will automatically handle clicks on the Home/Up button,<br></br>
+     * so long as you specify a parent activity in AndroidManifest.xml.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.i(TAG, "OnMenuOptionClick: " + item.itemId)
+        onMenuItemClick(item.itemId)
+        return true
     }
 
     private fun initToolbar() {
@@ -77,17 +93,6 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
 
     protected fun showLoadingCircle(isShow : Boolean) = getLoadingCircle()?.run { visibility = if (isShow) View.VISIBLE else View.GONE }
 
-    override fun onBackPressed() {
-        getDrawer()?.run {
-            if (isDrawerOpen(GravityCompat.START)) {
-                closeDrawer(GravityCompat.START)
-                return
-            }
-        }
-
-        super.onBackPressed()
-    }
-
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart!!!")
@@ -106,6 +111,17 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop!!!")
+    }
+
+    override fun onBackPressed() = when {
+        hasFragmentBackStack() -> {
+            super.onBackPressed()
+        }
+        System.currentTimeMillis() - exitTime > 2000 -> {
+            Utility.toastShort(getString(R.string.confirm_to_exit))
+            exitTime = System.currentTimeMillis()
+        }
+        else -> Utility.forceCloseTask()
     }
 
     override fun onDestroy() {

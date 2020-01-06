@@ -1,5 +1,6 @@
 package com.vincent.shadowsocksdemo.utilities
 
+import android.os.Process
 import android.util.DisplayMetrics
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -9,6 +10,10 @@ import com.vincent.shadowsocksdemo.AppController
  * Created by Vincent on 2020/1/3.
  */
 object Utility {
+
+    fun forceCloseTask() {
+        Process.killProcess(Process.myPid())
+    }
 
     fun toastShort(msg: String) {
         Toast.makeText(AppController.instance.applicationContext, msg, Toast.LENGTH_SHORT).show()

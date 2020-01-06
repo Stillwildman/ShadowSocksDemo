@@ -6,13 +6,17 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.vincent.shadowsocksdemo.R
+import com.vincent.shadowsocksdemo.callbacks.FragmentInterface
+import com.vincent.shadowsocksdemo.callbacks.OnOptionsClickCallback
 
 /**
  * Created by Vincent on 2020/1/3.
  */
-abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivity<bindingView>(), FragmentManager.OnBackStackChangedListener {
+abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivity<bindingView>(), FragmentManager.OnBackStackChangedListener, FragmentInterface {
 
-    protected abstract fun onFragmentsAllGone()
+    protected abstract fun onBackToHome()
+
+    private lateinit var optionsClickCallback : OnOptionsClickCallback
 
     protected val fm : FragmentManager by lazy { supportFragmentManager }
 
@@ -27,16 +31,16 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
 
         Log.i(TAG, "onBackStackChanged: $backStackCount")
 
-        if (backStackCount == 0) {
+        if (backStackCount == 1) {
             toggle?.run { isDrawerIndicatorEnabled = true }
-            onFragmentsAllGone()
+            onBackToHome()
         }
         else {
             toggle?.run { isDrawerIndicatorEnabled = false }
+        }
 
-            if (backStackCount < this.backStackCount) {
-                resumeFragment()
-            }
+        if (backStackCount < this.backStackCount) {
+            resumeFragment()
         }
 
         this.backStackCount = backStackCount
@@ -44,9 +48,9 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
 
     private fun resumeFragment() = fm.findFragmentById(R.id.fragment_container)?.run { onResume() }
 
-    private fun hasFragments() : Boolean = fm.backStackEntryCount > 0
+    private fun isFragmentsMoreThanOne() : Boolean = fm.backStackEntryCount > 1
 
-    protected fun goToFragment(instance : Fragment, useReplace : Boolean, @Nullable backName : String?) {
+    private fun goToFragment(instance : Fragment, useReplace : Boolean, @Nullable backName : String?) {
         fm.findFragmentById(R.id.fragment_container)?.run {
             if (equals(instance)) return
         }
@@ -59,8 +63,8 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
         }
     }
 
-    protected fun popBack(@Nullable backName : String?) {
-        if (hasFragments()) {
+    private fun popBack(@Nullable backName : String?) {
+        if (isFragmentsMoreThanOne()) {
             if (backName == null) {
                 fm.popBackStackImmediate()
             }
@@ -71,9 +75,45 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
     }
 
     protected fun clearFragments() {
-        if (hasFragments()) {
-            val backLevel = fm.getBackStackEntryAt(0)
+        if (isFragmentsMoreThanOne()) {
+            val backLevel = fm.getBackStackEntryAt(1)
             fm.popBackStack(backLevel.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+    }
+
+    override fun onFragmentSetTitle(titleRes: Int) {
+        this.setTitle(titleRes)
+    }
+
+    override fun onFragmentSetMenu(actions: IntArray?) {
+        // TODO
+    }
+
+    override fun onFragmentOpen(instance: Fragment, useReplace: Boolean, backName: String?) {
+        goToFragment(instance, useReplace, backName)
+    }
+
+    override fun onFragmentPopBack(backName: String?) {
+        popBack(backName)
+    }
+
+    override fun onFragmentWantSomeCircle(inLoading: Boolean) {
+        showLoadingCircle(inLoading)
+    }
+
+    override fun onSetOptionsClickCallback(callback: OnOptionsClickCallback) {
+        optionsClickCallback = callback
+    }
+
+    override fun hasFragmentBackStack(): Boolean = isFragmentsMoreThanOne()
+
+    override fun onMenuItemClick(itemId: Int) {
+        optionsClickCallback.onMenuItemClick(itemId)
+    }
+
+    override fun onBackPressed() {
+        if (!optionsClickCallback.onFragmentBackPressed()) {
+            super.onBackPressed()
         }
     }
 }
