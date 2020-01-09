@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="icon_id" type="id" />
+
+    <item name="title_id" type="id" />
+
+    <item name="snippet_id" type="id" />
+
+    <item name="switch_id" type="id" />
+
+</resources>

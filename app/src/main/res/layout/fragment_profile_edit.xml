@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="item"
+            type="com.github.shadowsocks.database.Profile" />
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_size_m"
+            android:paddingBottom="@dimen/padding_size_m" >
+
+            <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
+                android:id="@+id/widget_profileName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconRes="@drawable/ic_point"
+                app:titleText="@string/profile_name"
+                app:snippetText="@{item.nameText}"
+                android:onClick="@{(v) -> click.onClick(v)}"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/padding_size_xl"
+                android:layout_marginBottom="@dimen/padding_size_xl"
+                android:background="@color/md_grey_300" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_size_super"
+                android:layout_marginBottom="@dimen/padding_size_xl"
+                android:text="@string/proxy_cat"
+                android:textColor="@color/md_green_A700"
+                android:textSize="@dimen/font_text_size_m" />
+
+            <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
+                android:id="@+id/widget_server"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconRes="@drawable/ic_point"
+                app:titleText="@string/proxy"
+                app:snippetText="@{item.host}"/>
+
+            <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
+                android:id="@+id/widget_remotePort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconRes="@drawable/ic_point"
+                app:titleText="@string/remote_port"
+                app:snippetText="@{String.valueOf(item.remotePort)}"/>
+
+            <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
+                android:id="@+id/widget_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconRes="@drawable/ic_point"
+                app:titleText="@string/site_key"
+                app:snippetText="@{item.password}"
+                app:isPassword="true"/>
+
+            <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
+                android:id="@+id/widget_encMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconRes="@drawable/ic_point"
+                app:titleText="@string/enc_method"
+                app:snippetText="@{item.method}"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/padding_size_xl"
+                android:layout_marginBottom="@dimen/padding_size_xl"
+                android:background="@color/md_grey_300" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_size_super"
+                android:layout_marginBottom="@dimen/padding_size_xl"
+                android:text="@string/feature_cat"
+                android:textColor="@color/md_green_A700"
+                android:textSize="@dimen/font_text_size_m" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

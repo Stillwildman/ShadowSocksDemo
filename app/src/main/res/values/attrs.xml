@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SelectionItemWidget">
+
+        <attr name="iconRes" format="integer" />
+
+        <attr name="titleText" format="reference|string" />
+
+        <attr name="snippetText" format="reference|string" />
+
+        <attr name="showSwitch" format="boolean" />
+
+        <attr name="isPassword" format="boolean" />
+
+    </declare-styleable>
+
+</resources>

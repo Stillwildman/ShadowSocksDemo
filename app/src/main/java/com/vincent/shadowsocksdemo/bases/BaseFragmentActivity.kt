@@ -50,7 +50,7 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
 
     private fun isFragmentsMoreThanOne() : Boolean = fm.backStackEntryCount > 1
 
-    private fun goToFragment(instance : Fragment, useReplace : Boolean, @Nullable backName : String?) {
+    protected fun goToFragment(instance : Fragment, useReplace : Boolean, @Nullable backName : String?) {
         fm.findFragmentById(R.id.fragment_container)?.run {
             if (equals(instance)) return
         }
@@ -82,11 +82,13 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
     }
 
     override fun onFragmentSetTitle(titleRes: Int) {
-        this.setTitle(titleRes)
+        if (titleRes != 0) {
+            this.setTitle(titleRes)
+        }
     }
 
     override fun onFragmentSetMenu(actions: IntArray?) {
-        // TODO
+        setMenuOptions(actions)
     }
 
     override fun onFragmentOpen(instance: Fragment, useReplace: Boolean, backName: String?) {

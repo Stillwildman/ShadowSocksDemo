@@ -15,6 +15,7 @@
   <!-- Common -->
   <string name="confirm_to_exit">Tap \'Back\' again to exit the app.</string>
   <string name="select_node">Select a Node</string>
+  <string name="value_not_set">Not Set</string>
 
   <!-- misc -->
   <string name="service_mode">Service mode</string>
@@ -41,7 +42,7 @@
   <string name="profile_name">Profile Name</string>
   <string name="proxy">Server</string>
   <string name="remote_port">Remote Port</string>
-  <string name="sitekey">Password</string>
+  <string name="site_key">Password</string>
   <string name="enc_method">Encrypt Method</string>
 
   <!-- feature category -->

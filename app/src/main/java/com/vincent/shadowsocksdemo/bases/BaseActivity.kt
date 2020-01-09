@@ -14,12 +14,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.vincent.shadowsocksdemo.R
+import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.utilities.MenuHelper
 import com.vincent.shadowsocksdemo.utilities.Utility
 
 /**
  * Created by Vincent on 2020/1/3.
  */
-abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, Const {
 
     protected val TAG = javaClass.simpleName
 
@@ -62,6 +64,12 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
         Log.i(TAG, "OnMenuOptionClick: " + item.itemId)
         onMenuItemClick(item.itemId)
         return true
+    }
+
+    protected fun setMenuOptions(actions: IntArray?) {
+        getToolbar()?.run {
+            MenuHelper.setMenuOptions(menu, actions)
+        }
     }
 
     private fun initToolbar() {

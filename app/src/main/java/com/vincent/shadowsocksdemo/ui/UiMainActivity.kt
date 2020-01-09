@@ -10,7 +10,8 @@ import com.google.android.material.navigation.NavigationView
 import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.bases.BaseFragmentActivity
 import com.vincent.shadowsocksdemo.databinding.ActivityMainBinding
-import com.vincent.shadowsocksdemo.model.CommonConstants
+import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.ui.fragments.UiHomeFragment
 
 class UiMainActivity : BaseFragmentActivity<ActivityMainBinding>() {
 
@@ -36,7 +37,11 @@ class UiMainActivity : BaseFragmentActivity<ActivityMainBinding>() {
 
     override fun init() {
         super.init()
+        inflateHomeFragment()
+    }
 
+    private fun inflateHomeFragment() {
+        goToFragment(UiHomeFragment(), true, null)
     }
 
     override fun onBackToHome() {
@@ -45,7 +50,7 @@ class UiMainActivity : BaseFragmentActivity<ActivityMainBinding>() {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            CommonConstants.TOOLBAR_HOME -> super.onBackPressed()
+            Const.TOOLBAR_HOME -> super.onBackPressed()
         }
     }
 

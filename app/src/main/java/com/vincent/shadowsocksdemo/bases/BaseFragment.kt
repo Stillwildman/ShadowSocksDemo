@@ -12,11 +12,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.vincent.shadowsocksdemo.callbacks.FragmentInterface
 import com.vincent.shadowsocksdemo.callbacks.OnOptionsClickCallback
+import com.vincent.shadowsocksdemo.model.Const
 
 /**
  * Created by Vincent on 2020/1/6.
  */
-abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptionsClickCallback {
+abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptionsClickCallback, View.OnClickListener, Const {
 
     protected var TAG = javaClass.simpleName
 
@@ -50,6 +51,8 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
     }
 
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreate(savedInstanceState)
+
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
 
         init()
@@ -75,12 +78,17 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
     override fun onResume() {
         super.onResume()
         setTitleAndMenu()
+        setActivityOptionsCallback()
         Log.d(TAG, "onResume!!!")
     }
 
     private fun setTitleAndMenu() {
         fragmentInterface.onFragmentSetTitle(getTitleRes())
         fragmentInterface.onFragmentSetMenu(getMenuOptions())
+    }
+
+    private fun setActivityOptionsCallback() {
+        fragmentInterface.onSetOptionsClickCallback(this)
     }
 
     protected fun goToFragment(instance : Fragment, useReplace : Boolean, backName : String?) = fragmentInterface.onFragmentOpen(instance, useReplace, backName)

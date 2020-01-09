@@ -38,7 +38,7 @@
     <string name="profile_name">"サーバー名"</string>
     <string name="proxy">"サーバーアドレス"</string>
     <string name="remote_port">"リモートポート"</string>
-    <string name="sitekey">"パスワード"</string>
+    <string name="site_key">"パスワード"</string>
     <string name="enc_method">"暗号化方式"</string>
 
     <!-- feature category -->

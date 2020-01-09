@@ -27,6 +27,7 @@ import android.util.Base64
 import android.util.Log
 import android.util.LongSparseArray
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.github.shadowsocks.plugin.PluginConfiguration
 import com.github.shadowsocks.plugin.PluginOptions
@@ -227,6 +228,9 @@ data class Profile(
         @Query("SELECT * FROM `Profile` ORDER BY `userOrder`")
         fun list(): List<Profile>
 
+        @Query("SELECT * FROM `Profile` ORDER BY `userOrder`")
+        fun liveList(): LiveData<List<Profile>>
+
         @Query("SELECT MAX(`userOrder`) + 1 FROM `Profile`")
         fun nextOrder(): Long?
 
@@ -348,4 +352,6 @@ data class Profile(
         plugin = DataStore.plugin
         udpFallback = DataStore.udpFallback
     }
+
+    fun getNameText(): String = name as String
 }

@@ -36,7 +36,7 @@
     <string name="profile_name">"Имя профиля"</string>
     <string name="proxy">"Сервер"</string>
     <string name="remote_port">"Удалённый порт"</string>
-    <string name="sitekey">"Пароль"</string>
+    <string name="site_key">"Пароль"</string>
     <string name="enc_method">"Метод шифрования"</string>
 
     <!-- feature category -->

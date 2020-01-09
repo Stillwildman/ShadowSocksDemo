@@ -32,6 +32,6 @@
     <string name="connection_test_error_status_code">"خطآ رقم: #%d"</string>
     <string name="proxy">"السيرفر"</string>
     <string name="remote_port">"المنفذ"</string>
-    <string name="sitekey">"كلمة المرور"</string>
+    <string name="site_key">"كلمة المرور"</string>
     <string name="enc_method">"طريقة التشفير"</string>
 </resources>
