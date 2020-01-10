@@ -11,13 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:launchMode="singleTop">
-        <activity android:name=".ui.UiMainActivity">
+
+        <activity
+            android:name=".ui.UiMainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

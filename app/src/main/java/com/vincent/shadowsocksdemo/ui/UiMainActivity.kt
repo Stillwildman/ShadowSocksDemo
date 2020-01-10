@@ -8,9 +8,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.vincent.shadowsocksdemo.R
-import com.vincent.shadowsocksdemo.bases.BaseFragmentActivity
 import com.vincent.shadowsocksdemo.databinding.ActivityMainBinding
 import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.ui.bases.BaseFragmentActivity
 import com.vincent.shadowsocksdemo.ui.fragments.UiHomeFragment
 
 class UiMainActivity : BaseFragmentActivity<ActivityMainBinding>() {

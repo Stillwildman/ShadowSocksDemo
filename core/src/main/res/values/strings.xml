@@ -16,6 +16,8 @@
   <string name="confirm_to_exit">Tap \'Back\' again to exit the app.</string>
   <string name="select_node">Select a Node</string>
   <string name="value_not_set">Not Set</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Cancel</string>
 
   <!-- misc -->
   <string name="service_mode">Service mode</string>
@@ -129,6 +131,7 @@
   <string name="add_profile_methods_scan_qr_code">Scan QR code</string>
   <string name="add_profile_methods_manual_settings">Manual Settings</string>
   <string name="add_profile_scanner_permission_required">Camera permission is required for scanning QR code.</string>
+  <string name="add_profile_methods_ss_url">By SS Url</string>
   <plurals name="removed">
     <item quantity="one">Removed</item>
     <item quantity="other">%d items removed</item>

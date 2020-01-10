@@ -3,6 +3,7 @@ package com.vincent.shadowsocksdemo.ui.fragments
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,11 +12,12 @@ import com.github.shadowsocks.database.PrivateDatabase
 import com.github.shadowsocks.database.Profile
 import com.github.shadowsocks.database.ProfileManager
 import com.vincent.shadowsocksdemo.R
-import com.vincent.shadowsocksdemo.bases.BaseFragment
 import com.vincent.shadowsocksdemo.callbacks.OnSelectionDoneCallback
 import com.vincent.shadowsocksdemo.databinding.FragmentProfileSelectionBinding
 import com.vincent.shadowsocksdemo.model.Const
 import com.vincent.shadowsocksdemo.ui.adapters.ProfileListAdapter
+import com.vincent.shadowsocksdemo.ui.bases.BaseFragment
+import com.vincent.shadowsocksdemo.utilities.DialogHelper
 
 /**
  * Created by Vincent on 2020/1/8.
@@ -74,7 +76,42 @@ class UiProfileSelectionFragment : BaseFragment<FragmentProfileSelectionBinding>
     override fun onClick(v: View) {
         when (v.id) {
             R.id.button_edit -> openProfileEditFragment(v.tag as Int)
-            R.id.button_addNew -> openProfileEditFragment(null)
+            R.id.button_delete -> deleteProfile(v.tag as Int)
+            R.id.button_addNew -> showOptionsMenu(v)
+            R.id.layout_profileItemRoot -> switchProfileAndBackToHome(v.tag as Int)
+        }
+    }
+
+    private fun showOptionsMenu(view: View) {
+        PopupMenu(context, view).apply {
+            menuInflater.inflate(R.menu.menu_add_profile_options, menu)
+            show()
+        }.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_add_by_ss_url -> {
+                    openEditDialog()
+                }
+                R.id.action_manual -> {
+                    openProfileEditFragment(null)
+                }
+            }
+            true
+        }
+    }
+
+    private fun openEditDialog() {
+        DialogHelper.showSimpleEditDialog(context!!, object : OnSelectionDoneCallback {
+            override fun onSelectionDone(ssUrl: String) {
+                createProfileFromSsUrl(ssUrl)
+            }
+        })
+    }
+
+    private fun createProfileFromSsUrl(SsUrl: String) {
+        val profiles = Profile.findAllUrls(SsUrl, Core.currentProfile?.first).toList()
+
+        for (profile in profiles) {
+            ProfileManager.createProfile(profile)
         }
     }
 
@@ -87,6 +124,23 @@ class UiProfileSelectionFragment : BaseFragment<FragmentProfileSelectionBinding>
         }
 
         goToFragment(UiProfileEditFragment.newInstance(profile!!), false, Const.BACK_PROFILE)
+    }
+
+    private fun deleteProfile(position: Int) {
+        getAdapter()?.let {
+            ProfileManager.delProfile(it.getItem(position).id)
+        }
+    }
+
+    private fun switchProfileAndBackToHome(position: Int) {
+        getAdapter()?.run {
+            getItem(position).let {
+                Core.switchProfile(it.id)
+                callback.onSelectionDone(it.name ?: it.host)
+
+                popBack(null)
+            }
+        }
     }
 
     override fun clearReference() {

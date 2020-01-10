@@ -13,6 +13,8 @@
 
         <attr name="isPassword" format="boolean" />
 
+        <attr name="isSpinner" format="boolean" />
+
     </declare-styleable>
 
 </resources>

@@ -1,13 +1,15 @@
-package com.vincent.shadowsocksdemo.bases
+package com.vincent.shadowsocksdemo.ui.bases
 
 import android.util.Log
 import androidx.annotation.Nullable
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.callbacks.FragmentInterface
 import com.vincent.shadowsocksdemo.callbacks.OnOptionsClickCallback
+import com.vincent.shadowsocksdemo.model.Const
 
 /**
  * Created by Vincent on 2020/1/3.
@@ -63,6 +65,13 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
         }
     }
 
+    private fun openDialogFragment(instance: DialogFragment) {
+        fm.beginTransaction().let {
+            it.addToBackStack(Const.BACK_DIALOG)
+            instance.show(it, Const.DIALOG_FRAGMENT)
+        }
+    }
+
     private fun popBack(@Nullable backName : String?) {
         if (isFragmentsMoreThanOne()) {
             if (backName == null) {
@@ -95,6 +104,10 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
         goToFragment(instance, useReplace, backName)
     }
 
+    override fun onOpenDialogFragment(instance: DialogFragment) {
+        openDialogFragment(instance)
+    }
+
     override fun onFragmentPopBack(backName: String?) {
         popBack(backName)
     }
@@ -114,7 +127,9 @@ abstract class BaseFragmentActivity<bindingView : ViewDataBinding> : BaseActivit
     }
 
     override fun onBackPressed() {
-        if (!optionsClickCallback.onFragmentBackPressed()) {
+        Log.i(TAG, "onBackPressed!!!")
+
+        if (!isFragmentsMoreThanOne() || !optionsClickCallback.onFragmentBackPressed()) {
             super.onBackPressed()
         }
     }

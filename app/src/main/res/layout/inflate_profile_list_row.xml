@@ -5,12 +5,16 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout_profileItemRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_size_xxl"
         android:paddingEnd="@dimen/padding_size_xxl"
         android:paddingTop="@dimen/padding_size_l"
-        android:paddingBottom="@dimen/padding_size_l">
+        android:paddingBottom="@dimen/padding_size_l"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:selectableItemBackground">
 
         <TextView
             android:id="@+id/text_profileName"
@@ -23,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/text_host"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_edit"/>
+            app:layout_constraintEnd_toStartOf="@+id/button_delete"/>
 
         <TextView
             android:id="@+id/text_host"
@@ -37,6 +41,18 @@
             app:layout_constraintEnd_toEndOf="@+id/text_profileName"
             app:layout_constraintTop_toBottomOf="@+id/text_profileName"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/button_delete"
+            android:layout_width="@dimen/icon_common_size"
+            android:layout_height="@dimen/icon_common_size"
+            android:layout_marginEnd="@dimen/padding_size_m"
+            app:srcCompat="@drawable/ic_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_edit"
+            android:padding="@dimen/padding_size_s"
+            android:background="?android:selectableItemBackground"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/button_edit"

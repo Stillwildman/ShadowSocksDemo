@@ -1,4 +1,4 @@
-package com.vincent.shadowsocksdemo.bases
+package com.vincent.shadowsocksdemo.ui.bases
 
 import android.content.Context
 import android.graphics.Color
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.vincent.shadowsocksdemo.callbacks.FragmentInterface
 import com.vincent.shadowsocksdemo.callbacks.OnOptionsClickCallback
@@ -92,6 +93,10 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
     }
 
     protected fun goToFragment(instance : Fragment, useReplace : Boolean, backName : String?) = fragmentInterface.onFragmentOpen(instance, useReplace, backName)
+
+    protected fun openDialogFragment(instance: DialogFragment) {
+        fragmentInterface.onOpenDialogFragment(instance)
+    }
 
     protected fun popBack(backName: String?) = fragmentInterface.onFragmentPopBack(backName)
 

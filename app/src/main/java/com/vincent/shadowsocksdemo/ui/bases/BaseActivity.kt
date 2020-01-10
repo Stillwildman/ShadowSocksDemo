@@ -1,4 +1,4 @@
-package com.vincent.shadowsocksdemo.bases
+package com.vincent.shadowsocksdemo.ui.bases
 
 import android.os.Bundle
 import android.util.Log

@@ -1,5 +1,6 @@
 package com.vincent.shadowsocksdemo.callbacks
 
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 
 /**
@@ -12,6 +13,8 @@ interface FragmentInterface {
     fun onFragmentSetMenu(actions: IntArray?)
 
     fun onFragmentOpen(instance: Fragment, useReplace: Boolean, backName: String?)
+
+    fun onOpenDialogFragment(instance: DialogFragment)
 
     fun onFragmentPopBack(backName: String?)
 

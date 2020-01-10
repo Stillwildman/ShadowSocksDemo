@@ -1,5 +1,6 @@
 package com.vincent.shadowsocksdemo.widgets
 
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.vincent.shadowsocksdemo.AppController
 import com.vincent.shadowsocksdemo.R
@@ -12,7 +13,7 @@ object TwoWayBindingObject {
     @JvmStatic
     @BindingAdapter("snippetText")
     fun setSnippetText(widget: SelectionItemWidget, snippetString: String?) {
-        widget.snippet.text = if (snippetString == null || snippetString.isEmpty()) {
+        (widget.snippetView as TextView).text = if (snippetString.isNullOrEmpty()) {
             AppController.instance.getString(R.string.value_not_set)
         }
         else {

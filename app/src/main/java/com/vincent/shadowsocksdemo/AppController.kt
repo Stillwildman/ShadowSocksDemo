@@ -2,6 +2,8 @@ package com.vincent.shadowsocksdemo
 
 import android.content.Context
 import android.content.res.Configuration
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
@@ -33,5 +35,18 @@ class AppController : MultiDexApplication() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         Core.updateNotificationChannels()
+    }
+
+    fun hideKeyboardByGivenView(isHide: Boolean, view: View) {
+        val imm = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        if (isHide) imm.hideSoftInputFromWindow(
+            view.applicationWindowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+        else {
+            view.requestFocus()
+            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 }

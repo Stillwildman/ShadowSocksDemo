@@ -2,11 +2,12 @@ package com.vincent.shadowsocksdemo.ui.fragments
 
 import android.util.Log
 import android.view.View
+import com.github.shadowsocks.Core
 import com.vincent.shadowsocksdemo.R
-import com.vincent.shadowsocksdemo.bases.BaseFragment
 import com.vincent.shadowsocksdemo.callbacks.OnSelectionDoneCallback
 import com.vincent.shadowsocksdemo.databinding.FragmentHomeBinding
 import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.ui.bases.BaseFragment
 
 
 /**
@@ -37,7 +38,16 @@ class UiHomeFragment : BaseFragment<FragmentHomeBinding>(), OnSelectionDoneCallb
     }
 
     private fun switchPowerState() {
-        mBinding.buttonPower.run { isSelected = !isSelected }
+        mBinding.buttonPower.run {
+            if (isSelected) {
+                Core.stopService()
+                isSelected = false
+            }
+            else {
+                Core.startService()
+                isSelected = true
+            }
+        }
 
         Log.i(TAG, "Power onClick!!!")
     }

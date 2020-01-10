@@ -1,4 +1,4 @@
-package com.vincent.shadowsocksdemo.bases
+package com.vincent.shadowsocksdemo.ui.bases
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

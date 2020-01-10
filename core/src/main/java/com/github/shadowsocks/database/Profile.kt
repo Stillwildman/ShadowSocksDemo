@@ -352,6 +352,4 @@ data class Profile(
         plugin = DataStore.plugin
         udpFallback = DataStore.udpFallback
     }
-
-    fun getNameText(): String = name as String
 }

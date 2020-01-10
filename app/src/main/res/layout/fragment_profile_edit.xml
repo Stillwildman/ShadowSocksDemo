@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/profile_name"
-                app:snippetText="@{item.nameText}"
+                app:snippetText="@{item.name}"
                 android:onClick="@{(v) -> click.onClick(v)}"/>
 
             <View
@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/proxy"
-                app:snippetText="@{item.host}"/>
+                app:snippetText="@{item.host}"
+                android:onClick="@{(v) -> click.onClick(v)}"/>
 
             <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
                 android:id="@+id/widget_remotePort"
@@ -64,7 +65,8 @@
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/remote_port"
-                app:snippetText="@{String.valueOf(item.remotePort)}"/>
+                app:snippetText="@{String.valueOf(item.remotePort)}"
+                android:onClick="@{(v) -> click.onClick(v)}"/>
 
             <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
                 android:id="@+id/widget_password"
@@ -73,7 +75,8 @@
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/site_key"
                 app:snippetText="@{item.password}"
-                app:isPassword="true"/>
+                app:isPassword="true"
+                android:onClick="@{(v) -> click.onClick(v)}"/>
 
             <com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
                 android:id="@+id/widget_encMethod"
@@ -81,7 +84,7 @@
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/enc_method"
-                app:snippetText="@{item.method}"/>
+                app:isSpinner="true"/>
 
             <View
                 android:layout_width="match_parent"

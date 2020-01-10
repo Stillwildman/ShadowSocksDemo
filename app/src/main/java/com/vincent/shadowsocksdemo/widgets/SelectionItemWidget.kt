@@ -6,6 +6,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatImageView
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import com.vincent.shadowsocksdemo.AppController
 import com.vincent.shadowsocksdemo.R
+import com.vincent.shadowsocksdemo.ui.adapters.KeyValueListAdapter
 import com.vincent.shadowsocksdemo.utilities.DrawableUtil
 
 
@@ -24,7 +26,12 @@ import com.vincent.shadowsocksdemo.utilities.DrawableUtil
  */
 class SelectionItemWidget: ConstraintLayout {
 
-    lateinit var snippet: TextView
+    private var titleString: String? = null
+
+    lateinit var snippetView: View
+
+    private var isPassword: Boolean = false
+    private var isSpinner: Boolean = false
 
     constructor(context: Context?) : super(context)
 
@@ -40,10 +47,11 @@ class SelectionItemWidget: ConstraintLayout {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.SelectionItemWidget)
 
         val iconRes: Int = attr.getResourceId(R.styleable.SelectionItemWidget_iconRes, 0)
-        val titleString: String? = attr.getString(R.styleable.SelectionItemWidget_titleText)
+        titleString = attr.getString(R.styleable.SelectionItemWidget_titleText)
         val snippetString: String? = attr.getString(R.styleable.SelectionItemWidget_snippetText)
         val showSwitch: Boolean = attr.getBoolean(R.styleable.SelectionItemWidget_showSwitch, false)
-        val isPassword: Boolean = attr.getBoolean(R.styleable.SelectionItemWidget_isPassword, false)
+        isPassword = attr.getBoolean(R.styleable.SelectionItemWidget_isPassword, false)
+        isSpinner = attr.getBoolean(R.styleable.SelectionItemWidget_isSpinner, false)
 
         initViews(iconRes, titleString, snippetString, showSwitch, isPassword)
 
@@ -81,24 +89,35 @@ class SelectionItemWidget: ConstraintLayout {
             setTextColor(ContextCompat.getColor(AppController.instance.applicationContext, R.color.md_grey_800))
         }
 
-        snippet = TextView(context).apply {
-            id = R.id.snippet_id
+        if (isSpinner) {
+            snippetView = Spinner(context).apply {
+                id = R.id.snippet_id
 
-            layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT)
+                layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT)
 
-            if (snippetString != null) {
-                text = snippetString
+                adapter = KeyValueListAdapter(getEncMethodPairList())
             }
-            else {
-                setText(R.string.value_not_set)
-            }
+        }
+        else {
+            snippetView = TextView(context).apply {
+                id = R.id.snippet_id
 
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-            setTextColor(ContextCompat.getColor(AppController.instance.applicationContext, R.color.md_grey_600))
+                layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT)
 
-            if (isPassword) {
-                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                transformationMethod = PasswordTransformationMethod.getInstance()
+                if (snippetString.isNullOrEmpty()) {
+                    setText(R.string.value_not_set)
+                }
+                else {
+                    text = snippetString
+                }
+
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                setTextColor(ContextCompat.getColor(AppController.instance.applicationContext, R.color.md_grey_600))
+
+                if (isPassword) {
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    transformationMethod = PasswordTransformationMethod.getInstance()
+                }
             }
         }
 
@@ -110,7 +129,7 @@ class SelectionItemWidget: ConstraintLayout {
         this.run {
             addView(icon)
             addView(title)
-            addView(snippet)
+            addView(snippetView)
             addView(switcher)
 
             setPadding(getPxSize(R.dimen.padding_size_xl))
@@ -124,14 +143,14 @@ class SelectionItemWidget: ConstraintLayout {
             connect(icon.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
 
             connect(title.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-            connect(title.id, ConstraintSet.BOTTOM, snippet.id, ConstraintSet.TOP)
+            connect(title.id, ConstraintSet.BOTTOM, snippetView.id, ConstraintSet.TOP)
             connect(title.id, ConstraintSet.START, icon.id, ConstraintSet.END, getPxSize(R.dimen.padding_size_xl))
             connect(title.id, ConstraintSet.END, switcher.id, ConstraintSet.START, getPxSize(R.dimen.padding_size_l))
 
-            connect(snippet.id, ConstraintSet.TOP, title.id, ConstraintSet.BOTTOM, getPxSize(R.dimen.padding_size_m))
-            connect(snippet.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
-            connect(snippet.id, ConstraintSet.START, title.id, ConstraintSet.START)
-            connect(snippet.id, ConstraintSet.END, title.id, ConstraintSet.END)
+            connect(snippetView.id, ConstraintSet.TOP, title.id, ConstraintSet.BOTTOM, getPxSize(R.dimen.padding_size_m))
+            connect(snippetView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            connect(snippetView.id, ConstraintSet.START, title.id, ConstraintSet.START)
+            connect(snippetView.id, ConstraintSet.END, title.id, ConstraintSet.END)
 
             connect(switcher.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
             connect(switcher.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
@@ -143,7 +162,30 @@ class SelectionItemWidget: ConstraintLayout {
 
     private fun getPxSize(@DimenRes dimenRes: Int): Int = AppController.instance.applicationContext.resources.getDimensionPixelSize(dimenRes)
 
-    fun setSnippet(snippet: String) {
-        this.snippet.text = snippet
+    private fun getEncMethodPairList(): List<Pair<String, String>> {
+        val nameArray = AppController.instance.resources.getStringArray(R.array.enc_method_entry)
+        val valueArray = AppController.instance.resources.getStringArray(R.array.enc_method_value)
+
+        return mutableListOf<Pair<String, String>>().apply {
+            for (i in nameArray.indices) {
+                add(Pair(nameArray[i], valueArray[i]))
+            }
+        }
+    }
+
+    fun getTitle(): String = titleString ?: ""
+
+    fun getSnippet(): String = (snippetView as TextView).text.toString()
+
+    fun isPassword(): Boolean = isPassword
+
+    fun isSpinner(): Boolean = isSpinner
+
+    fun getSpinnerValue(): String {
+        return if (isSpinner) {
+            (snippetView as Spinner).let {
+                it.getItemAtPosition(it.selectedItemPosition).toString()
+            }
+        } else ""
     }
 }
