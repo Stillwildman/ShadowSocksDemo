@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.view.Window
+import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 import com.vincent.shadowsocksdemo.AppController
 import com.vincent.shadowsocksdemo.R
@@ -36,6 +38,13 @@ class UiProfileInputDialogFragment: BaseDialogFragment<DialogTextInputBinding>()
 
     fun setOnValueSetCallback(callback: OnValueSetCallback) {
         this.callback = callback
+    }
+
+    override fun setDialogWindowAttrs(window: Window) {
+        window.run {
+            val background = ContextCompat.getDrawable(AppController.instance.applicationContext, R.drawable.background_white_corner_10dp)
+            setBackgroundDrawable(background)
+        }
     }
 
     override fun init() {

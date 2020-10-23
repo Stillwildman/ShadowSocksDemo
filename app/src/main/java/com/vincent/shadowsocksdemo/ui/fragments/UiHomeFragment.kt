@@ -1,13 +1,15 @@
 package com.vincent.shadowsocksdemo.ui.fragments
 
-import android.util.Log
 import android.view.View
 import com.github.shadowsocks.Core
+import com.vincent.shadowsocksdemo.AppController
 import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.callbacks.OnSelectionDoneCallback
 import com.vincent.shadowsocksdemo.databinding.FragmentHomeBinding
 import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.ui.adapters.KeyValueListAdapter
 import com.vincent.shadowsocksdemo.ui.bases.BaseFragment
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 
 
 /**
@@ -24,6 +26,18 @@ class UiHomeFragment : BaseFragment<FragmentHomeBinding>(), OnSelectionDoneCallb
     override fun init() {
         mBinding.buttonPower.setOnClickListener(this)
         mBinding.layoutNodeSelector.root.setOnClickListener(this)
+
+        setSeverSelectionList()
+    }
+
+    private fun setSeverSelectionList() {
+        val serverList = arrayListOf<Pair<String, String>>().apply {
+            add(Pair(AppController.instance.getString(R.string.selector_select_server), ""))
+            add(Pair(AppController.instance.getString(R.string.selector_select_server), ""))
+            add(Pair(AppController.instance.getString(R.string.selector_select_server), ""))
+            add(Pair(AppController.instance.getString(R.string.selector_select_server), ""))
+        }
+        mBinding.spinnerServerSelector.adapter = KeyValueListAdapter(serverList).apply { setHintFirstItem() }
     }
 
     override fun onClick(v: View) {
@@ -39,17 +53,17 @@ class UiHomeFragment : BaseFragment<FragmentHomeBinding>(), OnSelectionDoneCallb
 
     private fun switchPowerState() {
         mBinding.buttonPower.run {
-            if (isSelected) {
+            isSelected = if (isSelected) {
                 Core.stopService()
-                isSelected = false
+                false
             }
             else {
                 Core.startService()
-                isSelected = true
+                true
             }
         }
 
-        Log.i(TAG, "Power onClick!!!")
+        LogUtil.i(TAG, "Power onClick!!!")
     }
 
     override fun onSelectionDone(name: String) {

@@ -28,6 +28,7 @@ import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import android.system.ErrnoException
 import android.system.Os
 import android.system.OsConstants
 import android.util.TypedValue
@@ -38,6 +39,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.io.FileDescriptor
 import java.net.HttpURLConnection
 import java.net.InetAddress
 import kotlin.coroutines.resume
@@ -58,6 +60,16 @@ fun <T> Iterable<T>.forEachTry(action: (T) -> Unit) {
 
 val Throwable.readableMessage get() = localizedMessage ?: javaClass.name
 
+/**
+ * https://android.googlesource.com/platform/prebuilts/runtime/+/94fec32/appcompat/hiddenapi-light-greylist.txt#9466
+ */
+private val getInt = FileDescriptor::class.java.getDeclaredMethod("getInt$")
+val FileDescriptor.int get() = getInt.invoke(this) as Int
+
+fun FileDescriptor.closeQuietly() = try {
+    Os.close(this)
+} catch (_: ErrnoException) { }
+
 private val parseNumericAddress by lazy @SuppressLint("DiscouragedPrivateApi") {
     InetAddress::class.java.getDeclaredMethod("parseNumericAddress", String::class.java).apply {
         isAccessible = true
@@ -73,8 +85,18 @@ fun String?.parseNumericAddress(): InetAddress? = Os.inet_pton(OsConstants.AF_IN
             if (Build.VERSION.SDK_INT >= 29) it else parseNumericAddress.invoke(null, this) as InetAddress
         }
 
-fun <K, V> MutableMap<K, V>.computeIfAbsentCompat(key: K, value: () -> V) = if (Build.VERSION.SDK_INT >= 24)
-    computeIfAbsent(key) { value() } else this[key] ?: value().also { put(key, it) }
+fun <K, V> MutableMap<K, V>.computeCompat(key: K, remappingFunction: (K, V?) -> V?) = if (Build.VERSION.SDK_INT < 24) {
+    val oldValue = get(key)
+    remappingFunction(key, oldValue).also { newValue ->
+        if (newValue != null) put(key, newValue) else if (oldValue != null || containsKey(key)) remove(key)
+    }
+} else compute(key) { k, oldValue -> remappingFunction(k, oldValue) }
+fun <K, V> MutableMap<K, V>.computeIfAbsentCompat(key: K, value: () -> V) = if (Build.VERSION.SDK_INT < 24) {
+    this[key] ?: value().also { put(key, it) }
+} else computeIfAbsent(key) { value() }
+fun <K, V> MutableMap<K, V>.putIfAbsentCompat(key: K, value: V) = if (Build.VERSION.SDK_INT < 24) {
+    this[key] ?: put(key, value)
+} else putIfAbsent(key, value)
 
 suspend fun <T> HttpURLConnection.useCancellable(block: suspend HttpURLConnection.() -> T): T {
     return suspendCancellableCoroutine { cont ->

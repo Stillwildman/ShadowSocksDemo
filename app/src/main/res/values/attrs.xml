@@ -17,4 +17,14 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ItemRowWidget">
+
+        <attr name="itemIconRes" format="integer" />
+
+        <attr name="text" format="reference|string" />
+
+        <attr name="hasSwitch" format="boolean" />
+
+    </declare-styleable>
+
 </resources>

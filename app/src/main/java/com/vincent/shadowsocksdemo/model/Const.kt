@@ -20,8 +20,12 @@ interface Const {
         const val BACK_HOME = "BackHome"
         const val BACK_PROFILE = "BackProfile"
         const val BACK_DIALOG = "BackDialog"
+        const val BACK_LOGIN = "BackLogin"
 
-        const val DEFAULT_SS_URL = "ss://YWVzLTI1Ni1nY206YWVzX3Bhc3N3b3Jk@34.84.14.190:8388#Test"
+        const val DEFAULT_SS_URL = "ss://YWVzLTI1Ni1jZmI6YWVzX3Bhc3N3b3Jk@34.84.14.190:8399#SSTest"
+
+        // EventMessage
+        const val EVENT_NETWORK_DONE = 1
     }
 
 }

@@ -4,22 +4,57 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_serverSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_size_super"
+            android:layout_marginEnd="@dimen/padding_size_super"
+            android:background="@drawable/background_spinner"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/text_userType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="VIP Member"
+            android:textSize="@dimen/font_text_size_s"
+            android:textColor="@color/md_white_1000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_serverSelector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.075"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/button_power"
             android:layout_width="@dimen/poi_photo_edit_view_l"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/padding_size_super"
-            android:padding="@dimen/font_text_size_xxl"
-            app:srcCompat="@drawable/selector_power"
-            android:background="@drawable/background_oval_stroke_grey"
-            style="@style/Widget.AppCompat.Button"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/padding_size_l"
+            app:srcCompat="@drawable/selector_connect_free"
+            app:layout_constraintTop_toBottomOf="@+id/text_userType"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="1:1"/>
+
+        <com.vincent.shadowsocksdemo.widgets.ItemRowWidget
+            android:id="@+id/widget_connection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_size_xxl"
+            android:layout_marginEnd="@dimen/padding_size_xxl"
+            android:layout_marginTop="@dimen/padding_size_xxl"
+            app:itemIconRes="@drawable/ic_connection"
+            app:text="@string/connection_status_is"
+            app:layout_constraintTop_toBottomOf="@+id/button_power"/>
 
         <include
             android:id="@+id/layout_nodeSelector"

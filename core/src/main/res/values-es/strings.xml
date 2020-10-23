@@ -36,7 +36,7 @@ Recibido: \t%4$s\t↓\t%2$s"</string>
     <string name="profile_name">"Nombre de Perfil"</string>
     <string name="proxy">"Servidor"</string>
     <string name="remote_port">"Puerto Remoto"</string>
-    <string name="site_key">"Contraseña"</string>
+    <string name="sitekey">"Contraseña"</string>
     <string name="enc_method">"Método de Cifrado"</string>
 
     <!-- feature category -->

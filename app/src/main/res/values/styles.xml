@@ -7,7 +7,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/md_amber_400</item>
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
@@ -20,6 +20,7 @@
         <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextStyle</item>
+        <item name="android:itemTextAppearance">@style/MyItemTextStyle</item>
     </style>
 
     <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,7 +28,15 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/background_map</item>
     </style>
+
+    <!-- PopupMenu -->
+    <style name="MyItemTextStyle" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/md_grey_900</item>
+        <item name="android:textSize">@dimen/font_text_size_m</item>
+    </style>
+    <!-- PopupMenu -->
 
     <style name="MyMenuTextStyle">
         <item name="android:textSize">@dimen/font_text_size_m</item>
@@ -89,6 +98,27 @@
         <item name="android:windowNoTitle">true</item>
         <!--<item name="android:windowFullscreen">true</item>-->
         <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="MyLoadingCircle">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">@drawable/custom_loading_circle</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">2500</item>
+        <item name="minWidth">@dimen/icon_common_size</item>
+        <item name="minHeight">@dimen/icon_common_size</item>
+        <item name="android:mirrorForRtl">false</item>
+    </style>
+
+    <style name="MyTextInputLayoutStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/md_white_1000</item>
+        <item name="colorControlNormal">@color/md_amber_400</item>
+        <item name="android:textColorHint">@color/md_grey_500</item>
+    </style>
+
+    <style name="MyTextInputHintStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/md_amber_A400</item>
+        <item name="android:textSize">@dimen/font_text_size_s</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

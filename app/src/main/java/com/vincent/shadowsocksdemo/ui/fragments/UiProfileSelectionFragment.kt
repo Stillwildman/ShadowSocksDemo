@@ -1,6 +1,5 @@
 package com.vincent.shadowsocksdemo.ui.fragments
 
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupMenu
@@ -18,6 +17,7 @@ import com.vincent.shadowsocksdemo.model.Const
 import com.vincent.shadowsocksdemo.ui.adapters.ProfileListAdapter
 import com.vincent.shadowsocksdemo.ui.bases.BaseFragment
 import com.vincent.shadowsocksdemo.utilities.DialogHelper
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 
 /**
  * Created by Vincent on 2020/1/8.
@@ -58,7 +58,7 @@ class UiProfileSelectionFragment : BaseFragment<FragmentProfileSelectionBinding>
 
         liveList.observe(this, Observer { profileList ->
             setProfileList(profileList)
-            Log.i(TAG, "on Profile list data Changed!!! Size: ${profileList.size}")
+            LogUtil.i(TAG, "on Profile list data Changed!!! Size: ${profileList.size}")
         })
     }
 
@@ -99,6 +99,7 @@ class UiProfileSelectionFragment : BaseFragment<FragmentProfileSelectionBinding>
         }
     }
 
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     private fun openEditDialog() {
         DialogHelper.showSimpleEditDialog(context!!, object : OnSelectionDoneCallback {
             override fun onSelectionDone(ssUrl: String) {

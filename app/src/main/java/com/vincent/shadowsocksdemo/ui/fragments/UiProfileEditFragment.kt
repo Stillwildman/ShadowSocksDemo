@@ -1,7 +1,6 @@
 package com.vincent.shadowsocksdemo.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.github.shadowsocks.database.Profile
 import com.github.shadowsocks.database.ProfileManager
@@ -11,6 +10,7 @@ import com.vincent.shadowsocksdemo.databinding.FragmentProfileEditBinding
 import com.vincent.shadowsocksdemo.model.Const
 import com.vincent.shadowsocksdemo.ui.bases.BaseFragment
 import com.vincent.shadowsocksdemo.ui.dialog.UiProfileInputDialogFragment
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 import com.vincent.shadowsocksdemo.utilities.MenuActions
 import com.vincent.shadowsocksdemo.widgets.SelectionItemWidget
 
@@ -79,7 +79,7 @@ class UiProfileEditFragment: BaseFragment<FragmentProfileEditBinding>(), OnValue
         if (!widget.isSpinner()) {
             UiProfileInputDialogFragment.newInstance(widget.getTitle(), widget.getSnippet(), widget.id, widget.isPassword()).apply {
                 setOnValueSetCallback(this@UiProfileEditFragment)
-                openDialogFragment(this)
+                openDialogFragment(this, false)
             }
         }
     }
@@ -122,7 +122,7 @@ class UiProfileEditFragment: BaseFragment<FragmentProfileEditBinding>(), OnValue
 
             ProfileManager.updateProfile(this)
 
-            Log.i(TAG, "onSavProfile!!!id: $id")
+            LogUtil.i(TAG, "onSavProfile!!!id: $id")
 
             popBack(null)
         }

@@ -3,7 +3,7 @@
           android:id="@+id/text_SpinnerText"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:paddingStart="@dimen/padding_size_m"
+          android:paddingStart="@dimen/padding_size_l"
           android:paddingEnd="@dimen/padding_size_m"
           android:paddingTop="@dimen/padding_size_l"
           android:paddingBottom="@dimen/padding_size_l"

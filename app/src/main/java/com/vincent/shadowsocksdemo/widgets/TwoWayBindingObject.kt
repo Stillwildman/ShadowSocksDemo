@@ -21,4 +21,10 @@ object TwoWayBindingObject {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("spinnerValue")
+    fun setSpinnerValue(widget: SelectionItemWidget, value: String) {
+        widget.setSpinnerValue(value)
+    }
+
 }

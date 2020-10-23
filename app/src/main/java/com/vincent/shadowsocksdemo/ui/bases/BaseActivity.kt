@@ -1,7 +1,6 @@
 package com.vincent.shadowsocksdemo.ui.bases
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -15,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 import com.vincent.shadowsocksdemo.utilities.MenuHelper
 import com.vincent.shadowsocksdemo.utilities.Utility
 
@@ -61,7 +61,7 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
      * so long as you specify a parent activity in AndroidManifest.xml.
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.i(TAG, "OnMenuOptionClick: " + item.itemId)
+        LogUtil.i(TAG, "OnMenuOptionClick: " + item.itemId)
         onMenuItemClick(item.itemId)
         return true
     }
@@ -103,22 +103,22 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart!!!")
+        LogUtil.d(TAG, "onStart!!!")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume!!!")
+        LogUtil.d(TAG, "onResume!!!")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause!!!")
+        LogUtil.d(TAG, "onPause!!!")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop!!!")
+        LogUtil.d(TAG, "onStop!!!")
     }
 
     override fun onBackPressed() = when {
@@ -134,6 +134,6 @@ abstract class BaseActivity<bindingView : ViewDataBinding> : AppCompatActivity()
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy!!!")
+        LogUtil.d(TAG, "onDestroy!!!")
     }
 }

@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
-                app:titleText="@string/site_key"
+                app:titleText="@string/sitekey"
                 app:snippetText="@{item.password}"
                 app:isPassword="true"
                 android:onClick="@{(v) -> click.onClick(v)}"/>
@@ -84,7 +84,8 @@
                 android:layout_height="wrap_content"
                 app:iconRes="@drawable/ic_point"
                 app:titleText="@string/enc_method"
-                app:isSpinner="true"/>
+                app:isSpinner="true"
+                app:spinnerValue="@{item.method}"/>
 
             <View
                 android:layout_width="match_parent"

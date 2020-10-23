@@ -35,7 +35,7 @@
     <string name="profile_name">"Profil İsmi"</string>
     <string name="proxy">"Sunucu"</string>
     <string name="remote_port">"Uzaktan Port"</string>
-    <string name="site_key">"Şifre"</string>
+    <string name="sitekey">"Şifre"</string>
     <string name="enc_method">"Şifreleme Methodu"</string>
     <string name="ipv6_summary">"IPv6 trafiğini remote'a yönlendir"</string>
     <string name="route_list">"Rota"</string>

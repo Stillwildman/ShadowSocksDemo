@@ -36,7 +36,7 @@ Reçu : \t\t\t%4$s\t↓\t%2$s"</string>
     <string name="profile_name">"Nom du Profil"</string>
     <string name="proxy">"Serveur"</string>
     <string name="remote_port">"Port Distant"</string>
-    <string name="site_key">"Mot de passe"</string>
+    <string name="sitekey">"Mot de passe"</string>
     <string name="enc_method">"Méthode d'Encryption"</string>
 
     <!-- feature category -->

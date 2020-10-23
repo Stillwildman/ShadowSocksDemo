@@ -19,12 +19,13 @@ import com.vincent.shadowsocksdemo.AppController
 import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.ui.adapters.KeyValueListAdapter
 import com.vincent.shadowsocksdemo.utilities.DrawableUtil
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 
 
 /**
  * Created by Vincent on 2020/1/9.
  */
-class SelectionItemWidget: ConstraintLayout {
+class SelectionItemWidget : ConstraintLayout {
 
     private var titleString: String? = null
 
@@ -97,8 +98,7 @@ class SelectionItemWidget: ConstraintLayout {
 
                 adapter = KeyValueListAdapter(getEncMethodPairList())
             }
-        }
-        else {
+        } else {
             snippetView = TextView(context).apply {
                 id = R.id.snippet_id
 
@@ -106,13 +106,17 @@ class SelectionItemWidget: ConstraintLayout {
 
                 if (snippetString.isNullOrEmpty()) {
                     setText(R.string.value_not_set)
-                }
-                else {
+                } else {
                     text = snippetString
                 }
 
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-                setTextColor(ContextCompat.getColor(AppController.instance.applicationContext, R.color.md_grey_600))
+                setTextColor(
+                    ContextCompat.getColor(
+                        AppController.instance.applicationContext,
+                        R.color.md_grey_600
+                    )
+                )
 
                 if (isPassword) {
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -144,23 +148,52 @@ class SelectionItemWidget: ConstraintLayout {
 
             connect(title.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
             connect(title.id, ConstraintSet.BOTTOM, snippetView.id, ConstraintSet.TOP)
-            connect(title.id, ConstraintSet.START, icon.id, ConstraintSet.END, getPxSize(R.dimen.padding_size_xl))
-            connect(title.id, ConstraintSet.END, switcher.id, ConstraintSet.START, getPxSize(R.dimen.padding_size_l))
+            connect(
+                title.id,
+                ConstraintSet.START,
+                icon.id,
+                ConstraintSet.END,
+                getPxSize(R.dimen.padding_size_xl)
+            )
+            connect(
+                title.id,
+                ConstraintSet.END,
+                switcher.id,
+                ConstraintSet.START,
+                getPxSize(R.dimen.padding_size_l)
+            )
 
-            connect(snippetView.id, ConstraintSet.TOP, title.id, ConstraintSet.BOTTOM, getPxSize(R.dimen.padding_size_m))
-            connect(snippetView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            connect(
+                snippetView.id,
+                ConstraintSet.TOP,
+                title.id,
+                ConstraintSet.BOTTOM,
+                getPxSize(R.dimen.padding_size_m)
+            )
+            connect(
+                snippetView.id,
+                ConstraintSet.BOTTOM,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.BOTTOM
+            )
             connect(snippetView.id, ConstraintSet.START, title.id, ConstraintSet.START)
             connect(snippetView.id, ConstraintSet.END, title.id, ConstraintSet.END)
 
             connect(switcher.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-            connect(switcher.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            connect(
+                switcher.id,
+                ConstraintSet.BOTTOM,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.BOTTOM
+            )
             connect(switcher.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
 
             applyTo(this@SelectionItemWidget)
         }
     }
 
-    private fun getPxSize(@DimenRes dimenRes: Int): Int = AppController.instance.applicationContext.resources.getDimensionPixelSize(dimenRes)
+    private fun getPxSize(@DimenRes dimenRes: Int): Int =
+        AppController.instance.applicationContext.resources.getDimensionPixelSize(dimenRes)
 
     private fun getEncMethodPairList(): List<Pair<String, String>> {
         val nameArray = AppController.instance.resources.getStringArray(R.array.enc_method_entry)
@@ -176,6 +209,14 @@ class SelectionItemWidget: ConstraintLayout {
     fun getTitle(): String = titleString ?: ""
 
     fun getSnippet(): String = (snippetView as TextView).text.toString()
+
+    fun setSpinnerValue(value: String) {
+        LogUtil.i(javaClass.simpleName, "SpinnerValue: $value")
+
+        (snippetView as Spinner).apply {
+            setSelection((adapter as KeyValueListAdapter).findIndexByValue(value))
+        }
+    }
 
     fun isPassword(): Boolean = isPassword
 

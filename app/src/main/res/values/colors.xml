@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01ABA0</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0C6379</color>
+    <color name="colorPrimaryDark">#006488</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- Transparent Colors -->
@@ -186,5 +186,10 @@
     <color name="yellow_bike">#FFAA30</color>
 
     <color name="light_green">#6AC259</color>
+
+    <!-- HuaYi VPN -->
+    <color name="background_main">#023745</color>
+    <color name="teal_widgets">#60ADB7</color>
+    <color name="common_item">#038BAF</color>
 
 </resources>

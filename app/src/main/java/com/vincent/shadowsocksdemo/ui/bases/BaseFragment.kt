@@ -1,19 +1,22 @@
 package com.vincent.shadowsocksdemo.ui.bases
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.vincent.shadowsocksdemo.AppController
+import com.vincent.shadowsocksdemo.R
 import com.vincent.shadowsocksdemo.callbacks.FragmentInterface
 import com.vincent.shadowsocksdemo.callbacks.OnOptionsClickCallback
 import com.vincent.shadowsocksdemo.model.Const
+import com.vincent.shadowsocksdemo.ui.dialog.LoadingDialogFragment
+import com.vincent.shadowsocksdemo.utilities.LogUtil
 
 /**
  * Created by Vincent on 2020/1/6.
@@ -37,18 +40,18 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
 
         try {
             fragmentInterface = context as FragmentInterface
-            Log.e(TAG, context.javaClass.simpleName + " must implement " + FragmentInterface::class.java.simpleName)
         }
         catch (e : ClassCastException) {
             e.printStackTrace()
+            LogUtil.e(TAG, context.javaClass.simpleName + " must implement " + FragmentInterface::class.java.simpleName)
         }
 
-        Log.d(TAG, "onAttach!!!")
+        LogUtil.d(TAG, "onAttach!!!")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate!!!")
+        LogUtil.d(TAG, "onCreate!!!")
     }
 
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,7 +60,7 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
 
         init()
-        Log.d(TAG, "Init!!! (onCreateView)")
+        LogUtil.d(TAG, "Init!!! (onCreateView)")
 
         return mBinding.root
     }
@@ -65,22 +68,22 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.setBackgroundColor(Color.WHITE)
+        view.background = ContextCompat.getDrawable(AppController.instance.applicationContext, R.drawable.background_map)
         view.isClickable = true
 
-        Log.d(TAG, "onViewCreated!!!")
+        LogUtil.d(TAG, "onViewCreated!!!")
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart!!!")
+        LogUtil.d(TAG, "onStart!!!")
     }
 
     override fun onResume() {
         super.onResume()
         setTitleAndMenu()
         setActivityOptionsCallback()
-        Log.d(TAG, "onResume!!!")
+        LogUtil.d(TAG, "onResume!!!")
     }
 
     private fun setTitleAndMenu() {
@@ -94,8 +97,16 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
 
     protected fun goToFragment(instance : Fragment, useReplace : Boolean, backName : String?) = fragmentInterface.onFragmentOpen(instance, useReplace, backName)
 
-    protected fun openDialogFragment(instance: DialogFragment) {
-        fragmentInterface.onOpenDialogFragment(instance)
+    protected fun openDialogFragment(instance: DialogFragment, isLoadingDialog : Boolean) {
+        fragmentInterface.onOpenDialogFragment(instance, isLoadingDialog)
+    }
+
+    protected fun showLoadingDialog() {
+        openDialogFragment(LoadingDialogFragment(), true)
+    }
+
+    protected fun dismissLoadingDialog() {
+        fragmentInterface.onDialogFragmentDismiss()
     }
 
     protected fun popBack(backName: String?) = fragmentInterface.onFragmentPopBack(backName)
@@ -104,12 +115,12 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause!!!")
+        LogUtil.d(TAG, "onPause!!!")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop!!!")
+        LogUtil.d(TAG, "onStop!!!")
     }
 
     override fun onFragmentBackPressed(): Boolean {
@@ -118,17 +129,17 @@ abstract class BaseFragment<bindingView : ViewDataBinding> : Fragment(), OnOptio
     }
 
     override fun onMenuItemClick(action: Int) {
-        Log.i(TAG, "onMenuItemClick!!! Action: $action")
+        LogUtil.i(TAG, "onMenuItemClick!!! Action: $action")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         clearReference()
-        Log.d(TAG, "onDestroyView!!!")
+        LogUtil.d(TAG, "onDestroyView!!!")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy!!!")
+        LogUtil.d(TAG, "onDestroy!!!")
     }
 }

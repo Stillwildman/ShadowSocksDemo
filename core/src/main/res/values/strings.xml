@@ -5,20 +5,6 @@
   <string name="quick_toggle">Toggle</string>
   <string name="send_email">Send email</string>
 
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
-
-  <!-- Menu -->
-  <string name="menu_home">Home</string>
-  <string name="menu_about">About</string>
-
-  <!-- Common -->
-  <string name="confirm_to_exit">Tap \'Back\' again to exit the app.</string>
-  <string name="select_node">Select a Node</string>
-  <string name="value_not_set">Not Set</string>
-  <string name="ok">OK</string>
-  <string name="cancel">Cancel</string>
-
   <!-- misc -->
   <string name="service_mode">Service mode</string>
   <string name="service_mode_proxy">Proxy only</string>
@@ -44,7 +30,7 @@
   <string name="profile_name">Profile Name</string>
   <string name="proxy">Server</string>
   <string name="remote_port">Remote Port</string>
-  <string name="site_key">Password</string>
+  <string name="sitekey">Password</string>
   <string name="enc_method">Encrypt Method</string>
 
   <!-- feature category -->
@@ -131,7 +117,6 @@
   <string name="add_profile_methods_scan_qr_code">Scan QR code</string>
   <string name="add_profile_methods_manual_settings">Manual Settings</string>
   <string name="add_profile_scanner_permission_required">Camera permission is required for scanning QR code.</string>
-  <string name="add_profile_methods_ss_url">By SS Url</string>
   <plurals name="removed">
     <item quantity="one">Removed</item>
     <item quantity="other">%d items removed</item>
@@ -149,6 +134,15 @@
   <string name="connecting">Connecting…</string>
   <string name="vpn_connected">Connected, tap to check connection</string>
   <string name="not_connected">Not connected</string>
+
+  <!-- subscriptions -->
+  <string name="subscriptions">Subscriptions</string>
+  <string name="add_subscription">Add a subscription</string>
+  <string name="edit_subscription">Edit subscription</string>
+  <string name="update_subscription">Refresh servers from subscription</string>
+  <string name="service_subscription">Subscription Service</string>
+  <string name="service_subscription_working">Syncing subscriptions… (%d of %d)</string>
+  <string name="service_subscription_finishing">Finishing up…</string>
 
   <!-- acl -->
   <string name="custom_rules">Custom rules</string>

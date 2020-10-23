@@ -14,7 +14,9 @@ interface FragmentInterface {
 
     fun onFragmentOpen(instance: Fragment, useReplace: Boolean, backName: String?)
 
-    fun onOpenDialogFragment(instance: DialogFragment)
+    fun onOpenDialogFragment(instance: DialogFragment, isLoadingDialog : Boolean)
+
+    fun onDialogFragmentDismiss()
 
     fun onFragmentPopBack(backName: String?)
 

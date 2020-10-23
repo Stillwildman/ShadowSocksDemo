@@ -35,16 +35,24 @@ class UiMainActivity : BaseFragmentActivity<ActivityMainBinding>() {
         return mBinding.navView
     }
 
-    override fun init() {
-        super.init()
+    override fun onInitDone() {
         inflateHomeFragment()
+
+        encryptTest()
+    }
+
+    private fun encryptTest() {
+//        LogUtil.i(TAG, "TestAESDecrypt: ${EncryptUtils.decryptBase64EncodedData("vzkF972yc0dtXtkt5OVumKy1JNOK0ga7p0CmhlwyUl9cMAhPKAQUgv/1Qje5MgdriKkJqkXQhgybyI55Q4I=", "12345678901234567890123456789012")}")
+//        val encoded = EncryptUtils.encryptAndBase64Encode("Hello World!", "1234567812345678")
+//        LogUtil.i(TAG, "Encode: $encoded")
+//        LogUtil.i(TAG, "Decode: ${EncryptUtils.decryptBase64EncodedData(encoded, "1234567812345678")}")
     }
 
     private fun inflateHomeFragment() {
         goToFragment(UiHomeFragment(), true, null)
     }
 
-    override fun onBackToHome() {
+    override fun onBackToFirstFragment() {
 
     }
 
